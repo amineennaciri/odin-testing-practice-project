@@ -30,7 +30,39 @@ let calculator = {
 }
 
 function caesarCipher(str,shiftFactor){
-
+    let alphaArr = 'abcdefghijklmnopqrstuvwxyz';
+    alphaArr = alphaArr.split('');
+    console.log(alphaArr);
+    let store = alphaArr[0];
+    alphaArr.shift();
+    alphaArr.push(store);
+    console.log(alphaArr);
+    str = str.split('');
+    for(let i = 0;i<= str.length-1;i++){
+        if(str[i]==' '){
+            continue; //"jumps over" one iteration in the loop.
+        }else if(str[i]!=alphaArr[alphaArr.length-1]){
+            for(let j = 0;j<= alphaArr.length-1;j++){
+                if(str[i]==alphaArr[j] && str[i]===str[i].toUpperCase()){
+                        str[i] = alphaArr[j+1].toUpperCase();
+                        break;
+                    }else{
+                        str[i] = alphaArr[j+1];
+                        break;
+                }
+            }
+            
+        }else if(str[i] == alphaArr[alphaArr.length-1]){
+            if(str[i]===str[i].toUpperCase()){
+                str[i] = alphaArr[0].toUpperCase();
+            }else{
+                str[i] = alphaArr[0];
+            }
+        }
+    }
+    return str.join('');
+    // to correct this whole function is full of bugs and errors it is wrongly coded.
 } 
-
+console.log(caesarCipher('',1));
+console.log(caesarCipher('Z',1));
 module.exports = { capitalize, reverseString, calculator, caesarCipher };
