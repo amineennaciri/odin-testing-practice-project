@@ -1,4 +1,4 @@
-const { capitalize, reverseString, calculator, caesarCipher } = require('./index');
+const { capitalize, reverseString, calculator, caesarCipher, analyzeArray } = require('./index');
 //const reverseString = require('./index');
 
 test('takes a string and returns it with the first character capitalized', () =>{
@@ -35,6 +35,17 @@ test('take a string and apply a ceaser Cipher on it', () =>{
     expect(caesarCipher('attack at dawn',1)).toMatch('buubdl bu ebxo');
     expect(caesarCipher('z',1)).toMatch('a');
     expect(caesarCipher('Z',1)).toMatch('A');
-    //expect(caesarCipher('z.',1)).toMatch('a.');
-    //expect(caesarCipher('z',1)).toMatch('a');
+    expect(caesarCipher('z.',1)).toMatch('a.');
+    expect(caesarCipher('AttackOnDawn',1)).toMatch('BuubdlPoEbxo');
+    expect(caesarCipher('?Attack.On:Dawn!',1)).toMatch('?Buubdl.Po:Ebxo!');
+    expect(caesarCipher('AttackOnDawn',4)).toMatch('ExxegoSrHear');
+    expect(caesarCipher('?Attack.On:Dawn!',4)).toMatch('?Exxego.Sr:Hear!');
+    expect(caesarCipher('?Attack.On:Dawn!',0)).toMatch('please enter a shift factor greater than zero');
+});
+
+test('take an array of numbers and return an object with the following properties', () =>{
+    expect(analyzeArray([1,8,3,4,2,6]).average()).toEqual(4);
+    expect(analyzeArray([1,8,3,4,2,6]).min()).toEqual(1);
+    expect(analyzeArray([1,8,3,4,2,6]).max()).toEqual(8);
+    expect(analyzeArray([1,8,3,4,2,6]).length).toEqual(6);
 });
